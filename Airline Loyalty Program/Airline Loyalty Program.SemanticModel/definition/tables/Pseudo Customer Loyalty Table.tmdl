@@ -1,0 +1,22 @@
+table 'Pseudo Customer Loyalty Table'
+	lineageTag: 74bf7a16-18e4-426f-b6af-8e03fad7e5b0
+
+	column Education
+		lineageTag: b572699b-1a23-4117-8199-a3a7cb0c7b87
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer Loyalty History[Education]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pseudo Customer Loyalty Table' = calculated
+		mode: import
+		source =
+				
+				UNION(
+				    DISTINCT('Customer Loyalty History'[Education]),
+				    DATATABLE("Education",STRING,{{"Others"}})
+				)
+
+	annotation PBI_Id = 85e2c83562404854aa4202388d3f3a14
+

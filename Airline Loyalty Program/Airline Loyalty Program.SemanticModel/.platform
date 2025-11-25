@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Airline Loyalty Program"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ce9a275c-8325-4c7a-8c54-768163d9b1a6"
+  }
+}

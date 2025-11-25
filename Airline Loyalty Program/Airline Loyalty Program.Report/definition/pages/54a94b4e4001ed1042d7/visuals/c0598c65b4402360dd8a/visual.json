@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "c0598c65b4402360dd8a",
+  "position": {
+    "x": 678.29921259842524,
+    "y": 32.251968503937007,
+    "z": 0,
+    "height": 150.17322834645668,
+    "width": 263.05511811023621,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Pseudo Customer Loyalty Table"
+                    }
+                  },
+                  "Property": "Education"
+                }
+              },
+              "queryRef": "Pseudo Customer Loyalty Table.Education",
+              "nativeQueryRef": "Education"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure Table"
+                    }
+                  },
+                  "Property": "Top N count"
+                }
+              },
+              "queryRef": "Measure Table.Ton N count",
+              "nativeQueryRef": "Top N count"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

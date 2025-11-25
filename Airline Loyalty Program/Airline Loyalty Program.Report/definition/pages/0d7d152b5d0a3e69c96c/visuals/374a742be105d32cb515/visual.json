@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "374a742be105d32cb515",
+  "position": {
+    "x": 856.35627530364377,
+    "y": 253.92712550607288,
+    "z": 2000,
+    "height": 136.03238866396762,
+    "width": 240.97165991902835,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "kpi",
+    "query": {
+      "queryState": {
+        "Indicator": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure Table"
+                    }
+                  },
+                  "Property": "Total Flights"
+                }
+              },
+              "queryRef": "Measure Table.Total Flights",
+              "nativeQueryRef": "Total Flights"
+            }
+          ]
+        },
+        "TrendLine": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendar"
+                    }
+                  },
+                  "Property": "Yr-Mth"
+                }
+              },
+              "queryRef": "Calendar.Yr-Mth",
+              "nativeQueryRef": "Yr-Mth"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

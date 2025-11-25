@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "42452d6ee0962190a395",
+  "position": {
+    "x": 755.044518598178,
+    "y": 106.23481781376526,
+    "z": 0,
+    "height": 147.69230769230771,
+    "width": 228.01619433198383,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "kpi",
+    "query": {
+      "queryState": {
+        "Indicator": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure Table"
+                    }
+                  },
+                  "Property": "Total Enrollments"
+                }
+              },
+              "queryRef": "Measure Table.Total Enrollments",
+              "nativeQueryRef": "Total Enrollments"
+            }
+          ]
+        },
+        "TrendLine": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendar"
+                    }
+                  },
+                  "Property": "Yr-Mth"
+                }
+              },
+              "queryRef": "Calendar.Yr-Mth",
+              "nativeQueryRef": "Yr-Mth"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

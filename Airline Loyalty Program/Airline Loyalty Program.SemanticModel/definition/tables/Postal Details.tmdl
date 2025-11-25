@@ -1,0 +1,43 @@
+table 'Postal Details'
+	lineageTag: 4f56ac7d-02a4-4c5f-a1a6-b51ac181556e
+
+	column City
+		dataType: string
+		lineageTag: 623387f1-8deb-482a-a65c-ba911023c921
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal Code'
+		dataType: string
+		lineageTag: ff7a8003-7d5e-497d-ad5a-66f77c859516
+		summarizeBy: none
+		sourceColumn: Postal Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2fb02f63-3a4c-4bc1-83e1-1ce546355a4f
+		summarizeBy: none
+		sourceColumn: Postal ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Postal Details' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Chinmayee Dixit\OneDrive - NowVertical Group Inc\Training & Learning\PBI Learning Track 2024\UC5 Airline+Loyalty+Program\UC5 Airline+Loyalty+Program\Postal Details.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"City", type text}, {"Postal Code", type text}, {"Postal ID", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

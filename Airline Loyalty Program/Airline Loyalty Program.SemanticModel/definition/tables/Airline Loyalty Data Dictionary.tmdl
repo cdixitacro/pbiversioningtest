@@ -1,0 +1,42 @@
+table 'Airline Loyalty Data Dictionary'
+	lineageTag: 06144f9d-3ccf-433a-9256-93706625d188
+
+	column Table
+		dataType: string
+		lineageTag: fc9978ec-adfb-4525-baad-000774015365
+		summarizeBy: none
+		sourceColumn: Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column Field
+		dataType: string
+		lineageTag: 54250b8b-cf4e-4d10-a434-a85ccfd9ed69
+		summarizeBy: none
+		sourceColumn: Field
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: eceac8db-00bd-4cc7-ae1d-351dd7068cb4
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Airline Loyalty Data Dictionary' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Chinmayee Dixit\OneDrive - NowVertical Group Inc\Training & Learning\PBI Learning Track 2024\UC5 Airline+Loyalty+Program\UC5 Airline+Loyalty+Program\Airline Loyalty Data Dictionary.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Table", type text}, {"Field", type text}, {"Description", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

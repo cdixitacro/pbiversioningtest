@@ -1,0 +1,202 @@
+table 'Customer Loyalty History'
+	lineageTag: 645f5f97-f95c-47c8-a081-8d593223b8ae
+
+	column 'Loyalty Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 958e6930-24c9-4dc1-a87e-7a3f4124fcbe
+		summarizeBy: none
+		sourceColumn: Loyalty Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 78db395a-9b9e-4f48-b1f0-ff7e9af92dbe
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Province
+		dataType: string
+		lineageTag: 9fc659d1-f614-4dc5-9756-bf45a7493059
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Province
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 42ca080d-ef83-4ca8-a373-44e4da0d2fb7
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: Postal ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 78acef42-3e0a-41f5-9710-2c47c83f6c8c
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Education
+		dataType: string
+		lineageTag: 9300a39e-3d5f-42e9-a807-bdeadfd7c6e2
+		summarizeBy: none
+		sourceColumn: Education
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salary
+		dataType: int64
+		formatString: 0
+		lineageTag: 95b4d9ac-9d6e-4864-bebd-6a99b5550420
+		summarizeBy: sum
+		sourceColumn: Salary
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marital Status'
+		dataType: string
+		lineageTag: d4c8eac5-c53a-4458-99ff-a104d1f3b452
+		summarizeBy: none
+		sourceColumn: Marital Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loyalty Card'
+		dataType: string
+		lineageTag: 8888d68a-62ff-4fc9-868d-77f64bc44442
+		summarizeBy: none
+		sourceColumn: Loyalty Card
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLV
+		dataType: double
+		lineageTag: a8ec9742-a63c-48cb-8981-26ce7858daca
+		summarizeBy: sum
+		sourceColumn: CLV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Enrollment Type'
+		dataType: string
+		lineageTag: 4f14c330-c06e-40b7-9570-0bfb20b57933
+		summarizeBy: none
+		sourceColumn: Enrollment Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enrollment Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6834456d-a761-4819-a3c4-26cd92f8d635
+		summarizeBy: sum
+		sourceColumn: Enrollment Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enrollment Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: fde15370-480b-4e6b-a065-a580604875c3
+		summarizeBy: sum
+		sourceColumn: Enrollment Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cancellation Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a09cb26-7d3e-4c49-bdd5-93d34b50b644
+		summarizeBy: sum
+		sourceColumn: Cancellation Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cancellation Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3664cfb4-c030-4cee-aaad-4356fd4b7938
+		summarizeBy: sum
+		sourceColumn: Cancellation Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enrollment Yr-Mth'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b2102204-6e17-45f5-8ad2-1a721b7fcd5f
+		summarizeBy: none
+		sourceColumn: Enrollment Yr-Mth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cancellation Yr-Mth'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9ea7eae2-e560-424b-a090-75d5ca40ca80
+		summarizeBy: none
+		sourceColumn: Cancellation Yr-Mth
+
+		variation Variation
+			isDefault
+			relationship: dc2fe086-2110-47b6-bb8c-5c81b87c1301
+			defaultHierarchy: LocalDateTable_4f216e41-33ab-4cf6-a120-c040eb280dc9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Membership Duration' = IF('Customer Loyalty History'[Cancellation Yr-Mth] <> BLANK(), DATEDIFF('Customer Loyalty History'[Enrollment Yr-Mth],'Customer Loyalty History'[Cancellation Yr-Mth],MONTH),DATEDIFF('Customer Loyalty History'[Enrollment Yr-Mth],TODAY(),MONTH))
+		formatString: 0
+		lineageTag: 6166b4cc-69eb-441c-bedc-4fef13e8cb05
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Member' = IF('Customer Loyalty History'[Cancellation Yr-Mth]<> BLANK(),"No","Yes")
+		lineageTag: 77c86558-46b8-40c2-bbc9-b5b64399d13a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Province Hierarchy'
+		lineageTag: 32d6b7b5-8e4e-48fb-9c22-49eb8fa2ad71
+
+		level Province
+			lineageTag: c83a167f-d96d-48c8-a568-58275af6fdd2
+			column: Province
+
+		level 'Postal ID'
+			lineageTag: 839bc134-7e01-4428-bfbe-8f8201f1e640
+			column: 'Postal ID'
+
+	partition 'Customer Loyalty History' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Chinmayee Dixit\OneDrive - NowVertical Group Inc\Training & Learning\PBI Learning Track 2024\UC5 Airline+Loyalty+Program\UC5 Airline+Loyalty+Program\Customer Loyalty History.csv"),[Delimiter=",", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Loyalty Number", Int64.Type}, {"Country", type text}, {"Province", type text}, {"Postal ID", Int64.Type}, {"Gender", type text}, {"Education", type text}, {"Salary", Int64.Type}, {"Marital Status", type text}, {"Loyalty Card", type text}, {"CLV", type number}, {"Enrollment Type", type text}, {"Enrollment Year", Int64.Type}, {"Enrollment Month", Int64.Type}, {"Cancellation Year", Int64.Type}, {"Cancellation Month", Int64.Type}}),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Changed Type", "Enrollment Yr-Mth", each Text.Combine({Text.From([Enrollment Month], "en-IN"), Text.From([Enrollment Year], "en-IN")}, "-"), type text),
+				    #"Inserted Merged Column1" = Table.AddColumn(#"Inserted Merged Column", "Cancellation Yr-Mth", each Text.Combine({Text.From([Cancellation Month], "en-IN"), Text.From([Cancellation Year], "en-IN")}, "-"), type text),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Inserted Merged Column1",{{"Enrollment Yr-Mth", type date}, {"Cancellation Yr-Mth", type date}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

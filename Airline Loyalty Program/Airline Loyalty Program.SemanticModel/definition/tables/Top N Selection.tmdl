@@ -1,0 +1,18 @@
+table 'Top N Selection'
+	lineageTag: af6e6b46-c4c3-4074-abc4-425ad28590ab
+
+	column Value
+		formatString: 0
+		lineageTag: ee3c4ecc-82f9-419b-ab82-f03aeba6ba80
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Top N Selection' = calculated
+		mode: import
+		source = {1,2,3}
+
+	annotation PBI_Id = 7033881942dd4eedbd4128dd4e7e6bb0
+

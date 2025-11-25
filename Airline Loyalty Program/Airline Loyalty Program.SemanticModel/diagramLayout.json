@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1317.3830500146937,
+            "y": 0
+          },
+          "nodeIndex": "Airline Loyalty Data Dictionary",
+          "nodeLineageTag": "06144f9d-3ccf-433a-9256-93706625d188",
+          "size": {
+            "height": 173.25,
+            "width": 225.25
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 957.63305001469371,
+            "y": 0
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "26e287eb-5901-4534-b165-188313693a46",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 649.63305001469382,
+            "y": 523.75
+          },
+          "nodeIndex": "Customer Flight Activity",
+          "nodeLineageTag": "cd291355-dc19-4259-b237-e727458c9b4e",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 584.70156119318528,
+            "y": 82.5
+          },
+          "nodeIndex": "Customer Loyalty History",
+          "nodeLineageTag": "645f5f97-f95c-47c8-a081-8d593223b8ae",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 223.75,
+            "y": 0
+          },
+          "nodeIndex": "Postal Details",
+          "nodeLineageTag": "4f56ac7d-02a4-4c5f-a1a6-b51ac181556e",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1318.3830481073451,
+            "y": 197.25
+          },
+          "nodeIndex": "Measure Table",
+          "nodeLineageTag": "f8cc1aca-46a6-45e9-8d45-417f01ea77c5",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 272.38304810734508,
+            "y": 294.875
+          },
+          "nodeIndex": "Pseudo Customer Loyalty Table",
+          "nodeLineageTag": "74bf7a16-18e4-426f-b6af-8e03fad7e5b0",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1314.8830481073451,
+            "y": 333.625
+          },
+          "nodeIndex": "Top N Selection",
+          "nodeLineageTag": "af6e6b46-c4c3-4074-abc4-425ad28590ab",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 80,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

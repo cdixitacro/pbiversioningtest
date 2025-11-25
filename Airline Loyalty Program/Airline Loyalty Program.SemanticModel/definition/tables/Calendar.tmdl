@@ -1,0 +1,174 @@
+table Calendar
+	lineageTag: 26e287eb-5901-4534-b165-188313693a46
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0c527d1d-f7e1-4525-809f-6187aee3c57f
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 9f31fe91-0536-44e7-89dc-267a0b82863d
+			defaultHierarchy: LocalDateTable_15a8a04d-428e-46a2-94cf-5996ba4059eb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Start of Year'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 16f94df6-3a19-4ede-a63f-24e7765460ff
+		summarizeBy: none
+		sourceColumn: Start of Year
+
+		variation Variation
+			isDefault
+			relationship: bc4db1ec-04c2-49bf-85dc-f6d027be16c8
+			defaultHierarchy: LocalDateTable_b6a15f54-845c-4480-b143-f2331281865b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Start of Quarter'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 58a79b56-2860-428e-801a-f699bc109b43
+		summarizeBy: none
+		sourceColumn: Start of Quarter
+
+		variation Variation
+			isDefault
+			relationship: 7f44d398-9aa3-451c-9b2c-e6040b1ab603
+			defaultHierarchy: LocalDateTable_ffad5776-c73f-4919-8ca7-932d5b326110.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Start of Month'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: da8a0157-9f43-44dd-aee7-0b3133569d8b
+		summarizeBy: none
+		sourceColumn: Start of Month
+
+		variation Variation
+			isDefault
+			relationship: 4fb854cb-d0d7-4c62-8980-a19f9cc7110a
+			defaultHierarchy: LocalDateTable_0b6162bd-5a5f-4431-8598-2f3e2d0175ef.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: bcaf0569-c80b-4948-8a3a-0e4713b75cce
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: bcd3820d-9dd6-4737-8f95-9994b7d4b494
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Yr-Mth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1f5e709a-8230-43d0-ab9b-54d44477aad7
+		summarizeBy: none
+		sourceColumn: Yr-Mth
+
+		variation Variation
+			isDefault
+			relationship: af016395-e00a-4238-8680-438fca8dd67b
+			defaultHierarchy: LocalDateTable_b24cca43-c71f-454d-9359-c852f6e2a9a2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Promotion active?' = IF('Calendar'[Year] = 2018 && 'Calendar'[Month] IN {2,3,4}, "Promotion Window", "Outside Promotion Window")
+		lineageTag: fef363d2-1d25-4474-985f-acb603dff3de
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season =
+			
+			SWITCH(
+			    'Calendar'[Month],
+			    1 , "Winter",
+			    2 , "Winter",
+			    3 , "Spring",
+			    4 , "Spring",
+			    5 , "Spring",
+			    6 , "Summer",
+			    7 , "Summer",
+			    8 , "Summer",
+			    9 , "Fall",
+			    10 , "Fall",
+			    11 , "Fall",
+			    12 , "Winter"
+			)
+		lineageTag: 4a7617fb-e159-4a3e-98c8-3aa3456a9014
+		summarizeBy: none
+		sortByColumn: 'Season Index'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Season Index' =
+			
+			SWITCH(
+			    'Calendar'[Month],
+			    1 , 4,
+			    2 , 4,
+			    3 , 1,
+			    4 , 1,
+			    5 , 1,
+			    6 , 2,
+			    7 , 2,
+			    8 , 2,
+			    9 , 3,
+			    10 , 3,
+			    11 , 3,
+			    12 , 4
+			)
+		formatString: 0
+		lineageTag: 81d610a3-ee3b-44dd-b575-bd93a2d04a75
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Chinmayee Dixit\OneDrive - NowVertical Group Inc\Training & Learning\PBI Learning Track 2024\UC5 Airline+Loyalty+Program\UC5 Airline+Loyalty+Program\Calendar.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Start of Year", type date}, {"Start of Quarter", type date}, {"Start of Month", type date}}),
+				    #"Inserted Month" = Table.AddColumn(#"Changed Type", "Month", each Date.Month([Date]), Int64.Type),
+				    #"Inserted Year" = Table.AddColumn(#"Inserted Month", "Year", each Date.Year([Date]), Int64.Type),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Inserted Year", "Yr-Mth", each Text.Combine({Text.From([Month], "en-IN"), Text.From([Year], "en-IN")}, "-"), type text),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Inserted Merged Column",{{"Yr-Mth", type date}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type1", {"Yr-Mth"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

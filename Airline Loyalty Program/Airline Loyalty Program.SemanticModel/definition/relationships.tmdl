@@ -1,0 +1,51 @@
+relationship 9f31fe91-0536-44e7-89dc-267a0b82863d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.Date
+	toColumn: LocalDateTable_15a8a04d-428e-46a2-94cf-5996ba4059eb.Date
+
+relationship bc4db1ec-04c2-49bf-85dc-f6d027be16c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.'Start of Year'
+	toColumn: LocalDateTable_b6a15f54-845c-4480-b143-f2331281865b.Date
+
+relationship 7f44d398-9aa3-451c-9b2c-e6040b1ab603
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.'Start of Quarter'
+	toColumn: LocalDateTable_ffad5776-c73f-4919-8ca7-932d5b326110.Date
+
+relationship 4fb854cb-d0d7-4c62-8980-a19f9cc7110a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.'Start of Month'
+	toColumn: LocalDateTable_0b6162bd-5a5f-4431-8598-2f3e2d0175ef.Date
+
+relationship AutoDetected_212caf06-3292-4211-b0c8-51c62b9e1a51
+	fromColumn: 'Customer Flight Activity'.'Loyalty Number'
+	toColumn: 'Customer Loyalty History'.'Loyalty Number'
+
+relationship AutoDetected_5682b934-eff4-4978-8c74-f409345d9f36
+	fromColumn: 'Customer Loyalty History'.'Postal ID'
+	toColumn: 'Postal Details'.'Postal ID'
+
+relationship af016395-e00a-4238-8680-438fca8dd67b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.Yr-Mth
+	toColumn: LocalDateTable_b24cca43-c71f-454d-9359-c852f6e2a9a2.Date
+
+relationship dc2fe086-2110-47b6-bb8c-5c81b87c1301
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Customer Loyalty History'.'Cancellation Yr-Mth'
+	toColumn: LocalDateTable_4f216e41-33ab-4cf6-a120-c040eb280dc9.Date
+
+relationship 890a37b6-660f-d4f5-ff50-6f47a8b9203d
+	fromColumn: 'Customer Loyalty History'.'Enrollment Yr-Mth'
+	toColumn: Calendar.Yr-Mth
+
+relationship c47ec87f-baef-106b-9822-516ccc1af7c1
+	isActive: false
+	fromColumn: 'Customer Flight Activity'.'Flight Yr-Mth'
+	toColumn: Calendar.Yr-Mth
+
+relationship 0296e7d0-d5d1-3868-66f2-293ee5c299b5
+	fromColumn: 'Customer Loyalty History'.Education
+	toColumn: 'Pseudo Customer Loyalty Table'.Education
+

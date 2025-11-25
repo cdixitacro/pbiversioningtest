@@ -1,0 +1,105 @@
+table 'Customer Flight Activity'
+	lineageTag: cd291355-dc19-4259-b237-e727458c9b4e
+
+	column 'Loyalty Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5751a89b-219d-48d8-9725-0d13eccef1f2
+		summarizeBy: none
+		sourceColumn: Loyalty Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 400f6e37-38d5-417a-8134-04a83f0e3714
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e8638e3-5870-4c92-a7de-52520b42e7be
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Flights'
+		dataType: int64
+		formatString: 0
+		lineageTag: dbabf15c-1260-441c-a436-8bae8d89538e
+		summarizeBy: sum
+		sourceColumn: Total Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Distance
+		dataType: int64
+		formatString: 0
+		lineageTag: bc8f47e2-e6d7-430f-a9ef-1e4cd9b36a4f
+		summarizeBy: sum
+		sourceColumn: Distance
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points Accumulated'
+		dataType: double
+		lineageTag: b4c1a9f2-d61c-4652-a4bc-5987764df75b
+		summarizeBy: sum
+		sourceColumn: Points Accumulated
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Points Redeemed'
+		dataType: int64
+		formatString: 0
+		lineageTag: 12244a93-9944-4a50-8db4-09bf6fd05359
+		summarizeBy: sum
+		sourceColumn: Points Redeemed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dollar Cost Points Redeemed'
+		dataType: int64
+		formatString: 0
+		lineageTag: a9e33019-948c-43bb-836b-0d01872b05bc
+		summarizeBy: sum
+		sourceColumn: Dollar Cost Points Redeemed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Flight Yr-Mth'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2c18127f-4e95-47e2-aeb0-3dd98279e41f
+		summarizeBy: none
+		sourceColumn: Flight Yr-Mth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Customer Flight Activity' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Chinmayee Dixit\OneDrive - NowVertical Group Inc\Training & Learning\PBI Learning Track 2024\UC5 Airline+Loyalty+Program\UC5 Airline+Loyalty+Program\Customer Flight Activity.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Loyalty Number", Int64.Type}, {"Year", Int64.Type}, {"Month", Int64.Type}, {"Total Flights", Int64.Type}, {"Distance", Int64.Type}, {"Points Accumulated", type number}, {"Points Redeemed", Int64.Type}, {"Dollar Cost Points Redeemed", Int64.Type}}),
+				    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Changed Type", {"Loyalty Number"}),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Removed Errors", "Yr-Mth", each Text.Combine({Text.From([Month], "en-IN"), Text.From([Year], "en-IN")}, "-"), type text),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Inserted Merged Column",{{"Yr-Mth", type date}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Yr-Mth", "Flight Yr-Mth"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

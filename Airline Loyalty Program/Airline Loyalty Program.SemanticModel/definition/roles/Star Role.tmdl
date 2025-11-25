@@ -1,0 +1,7 @@
+role 'Star Role'
+	modelPermission: read
+
+	tablePermission 'Customer Loyalty History' = 'Customer Loyalty History'[Loyalty Card] = "Star"
+
+	annotation PBI_Id = a5b0cd33009d43b094f5be75e6e4bc11
+

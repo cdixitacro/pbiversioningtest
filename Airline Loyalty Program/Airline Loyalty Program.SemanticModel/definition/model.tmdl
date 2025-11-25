@@ -1,0 +1,35 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Airline Loyalty Data Dictionary","Calendar","Customer Flight Activity","Customer Loyalty History","Postal Details","Measure Table"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Airline Loyalty Data Dictionary'
+ref table Calendar
+ref table DateTableTemplate_fd580947-1a47-4d21-8e1c-682d6ffcf767
+ref table LocalDateTable_15a8a04d-428e-46a2-94cf-5996ba4059eb
+ref table LocalDateTable_b6a15f54-845c-4480-b143-f2331281865b
+ref table LocalDateTable_ffad5776-c73f-4919-8ca7-932d5b326110
+ref table LocalDateTable_0b6162bd-5a5f-4431-8598-2f3e2d0175ef
+ref table 'Customer Flight Activity'
+ref table 'Customer Loyalty History'
+ref table 'Postal Details'
+ref table 'Measure Table'
+ref table LocalDateTable_b24cca43-c71f-454d-9359-c852f6e2a9a2
+ref table LocalDateTable_4f216e41-33ab-4cf6-a120-c040eb280dc9
+ref table 'Pseudo Customer Loyalty Table'
+ref table 'Top N Selection'
+
+ref role All
+ref role 'Star Role'
+
+ref cultureInfo en-IN
+
