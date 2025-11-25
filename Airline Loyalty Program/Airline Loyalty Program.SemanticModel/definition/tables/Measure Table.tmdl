@@ -155,10 +155,6 @@ table 'Measure Table'
 		formatString: 0
 		lineageTag: f168fd4f-8e95-40c9-9fa4-a1707147213b
 
-	measure Test_measure2 = SUM('Customer Flight Activity'[Total Flights])
-		formatString: 0
-		lineageTag: 6b2ebb5e-4b87-459a-8b8f-a5a65cb84ab2
-
 	partition 'Measure Table' = m
 		mode: import
 		source =
