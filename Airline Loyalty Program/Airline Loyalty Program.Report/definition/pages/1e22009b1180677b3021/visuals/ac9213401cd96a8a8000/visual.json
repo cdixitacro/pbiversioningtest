@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ac9213401cd96a8a8000",
+  "position": {
+    "x": 428.45750262329489,
+    "y": 141.0283315844701,
+    "z": 0,
+    "height": 326.37985309548793,
+    "width": 550.682056663169,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pieChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customer Loyalty History"
+                    }
+                  },
+                  "Property": "Gender"
+                }
+              },
+              "queryRef": "Customer Loyalty History.Gender",
+              "nativeQueryRef": "Gender",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Customer Flight Activity"
+                        }
+                      },
+                      "Property": "Points Accumulated"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Customer Flight Activity.Points Accumulated)",
+              "nativeQueryRef": "Sum of Points Accumulated"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Customer Flight Activity"
+                      }
+                    },
+                    "Property": "Points Accumulated"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
